@@ -16,6 +16,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.heyl.myapplication.utils.Content;
 import com.heyl.myapplication.utils.IOUtils;
 
 import net.youmi.android.AdManager;
@@ -135,7 +136,7 @@ public class SplashActivity extends Activity {
     }
 
     private void runApp() {
-        AdManager.getInstance(this).init("90317fa210f0bc30", "159f21e7dfb37468", false, true);
+        AdManager.getInstance(this).init(Content.AppID, Content.AppSecrt, false, true);
         //设置开屏
         setupSplashAd();
     }
