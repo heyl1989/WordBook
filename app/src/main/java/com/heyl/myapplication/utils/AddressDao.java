@@ -10,7 +10,7 @@ import java.io.File;
 public class AddressDao {
 	
 	public static String queryAddress(String num,Context context){
-		File file = context.getDatabasePath("dictionary.db");
+		File file =  new File(context.getFilesDir(), "dictionary.db");
 		String location="";
 		if(!file.exists()){
 			Toast.makeText(context,"字典加载失败,请退出程序重新进入",Toast.LENGTH_SHORT).show();
