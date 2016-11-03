@@ -1,42 +1,21 @@
 package com.heyl.myapplication;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.res.AssetManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.heyl.myapplication.utils.AddressDao;
-import com.heyl.myapplication.utils.IOUtils;
-
-import net.youmi.android.AdManager;
-import net.youmi.android.normal.banner.BannerManager;
-import net.youmi.android.normal.banner.BannerViewListener;
-import net.youmi.android.normal.spot.SpotManager;
-import net.youmi.android.normal.video.VideoAdManager;
-
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private static final String TAG = "MainActivity";
     private LinearLayout bannerLayout;
     private EditText originalText;
     private ImageView delete;
@@ -67,45 +46,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         translationText = (TextView) findViewById(R.id.tv_translation);
 
-        //设置广告条
-        setupBannerAd();
-    }
-
-
-    /**
-     * 设置广告条广告
-     */
-    private void setupBannerAd() {
-
-        /**
-         * 悬浮布局
-         */
-        // 实例化LayoutParams
-        FrameLayout.LayoutParams layoutParams =
-                new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        // 设置广告条的悬浮位置，这里示例为右下角
-        layoutParams.gravity = Gravity.BOTTOM | Gravity.RIGHT;
-        // 获取广告条控件
-        final View bannerView =
-                BannerManager.getInstance(this).getBannerView(new BannerViewListener
-                        () {
-
-                    @Override
-                    public void onRequestSuccess() {
-                        //Log.i(TAG, "请求广告条成功");
-                    }
-
-                    @Override
-                    public void onSwitchBanner() {
-                       // Log.i(TAG, "广告条切换");
-                    }
-
-                    @Override
-                    public void onRequestFailed() {
-                        //Log.i(TAG, "请求广告条失败");
-                    }
-                });
-        ((Activity) this).addContentView(bannerView, layoutParams);
     }
 
     @Override
