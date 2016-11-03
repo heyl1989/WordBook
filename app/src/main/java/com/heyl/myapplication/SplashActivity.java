@@ -12,6 +12,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
+import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -41,8 +44,6 @@ public class SplashActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // 设置全屏
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(R.layout.activity_splash);
         TextView tv_version = (TextView)findViewById(R.id.tv_version);
@@ -58,6 +59,33 @@ public class SplashActivity extends Activity {
         permission();
         //拷贝数据库
         copyDb();
+        init();
+    }
+
+    private void init() {
+        RelativeLayout rl_welcome_bg = (RelativeLayout) findViewById(R.id.rl_welcome_bg);
+        AlphaAnimation alphaAnimation = new AlphaAnimation(0, 1);
+        alphaAnimation.setDuration(2000);
+        alphaAnimation.setFillAfter(true);
+
+        AnimationSet animationSet = new AnimationSet(false);
+        animationSet.addAnimation(alphaAnimation);
+
+        rl_welcome_bg.startAnimation(animationSet);
+        // 监听动画
+        animationSet.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                startActivity(new Intent(mContext,MainActivity.class));
+                finish();
+            }
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+        });
     }
 
     /**
@@ -72,7 +100,7 @@ public class SplashActivity extends Activity {
             InputStream in = null;
             FileOutputStream out = null;
             try {
-                Log.e("数据库", "file");
+                //Log.e("数据库", "file");
                 in = am.open("dictionary.db");
                 //getCacheDir() : 获取缓存目录     getFilesDir():获取文件路径
                 out = new FileOutputStream(file);
@@ -136,73 +164,6 @@ public class SplashActivity extends Activity {
     }
 
     private void runApp() {
-        AdManager.getInstance(this).init(Content.AppID, Content.AppSecrt, false, true);
-        //设置开屏
-        setupSplashAd();
+        AdManager.getInstance(this).init(Content.AppID, Content.AppSecrt, false, false);
     }
-
-    /**
-     * 设置开屏广告
-     */
-    private void setupSplashAd() {
-        // 创建开屏容器
-        final RelativeLayout splashLayout = (RelativeLayout) findViewById(R.id.rl_splash);
-        RelativeLayout.LayoutParams params =
-                new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        params.addRule(RelativeLayout.ABOVE, R.id.view_divider);
-
-        // 对开屏进行设置
-        SplashViewSettings splashViewSettings = new SplashViewSettings();
-        // 设置跳转的窗口类
-        splashViewSettings.setTargetClass(MainActivity.class);
-        // 设置开屏的容器
-        splashViewSettings.setSplashViewContainer(splashLayout);
-
-        // 展示开屏广告
-        SpotManager.getInstance(mContext)
-                .showSplash(mContext, splashViewSettings, new SpotListener() {
-
-                    @Override
-                    public void onShowSuccess() {
-                        Log.d(TAG, "开屏展示成功");
-                        splashLayout.setVisibility(View.VISIBLE);
-                        splashLayout.startAnimation(AnimationUtils.loadAnimation(mContext, R.anim.anim_splash_enter));
-                    }
-
-                    @Override
-                    public void onShowFailed(int errorCode) {
-                        Log.d(TAG, "开屏展示失败");
-                        switch (errorCode) {
-                            case ErrorCode.NON_NETWORK:
-                                Log.e(TAG, "无网络");
-                                break;
-                            case ErrorCode.NON_AD:
-                                Log.e(TAG, "无广告");
-                                break;
-                            case ErrorCode.RESOURCE_NOT_READY:
-                                Log.e(TAG, "资源还没准备好");
-                                break;
-                            case ErrorCode.SHOW_INTERVAL_LIMITED:
-                                Log.e(TAG, "展示间隔限制");
-                                break;
-                            case ErrorCode.WIDGET_NOT_IN_VISIBILITY_STATE:
-                                Log.e(TAG, "控件处在不可见状态");
-                                break;
-                        }
-                    }
-
-                    @Override
-                    public void onSpotClosed() {
-                        Log.d(TAG, "开屏被关闭");
-                    }
-
-                    @Override
-                    public void onSpotClicked(boolean isWebPage) {
-                        Log.d(TAG, "开屏被点击");
-                        Log.i(TAG, String.format("是否是网页广告？%s", isWebPage ? "是" : "不是"));
-                    }
-                });
-    }
-
-
 }

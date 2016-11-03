@@ -92,17 +92,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                     @Override
                     public void onRequestSuccess() {
-                        Log.i(TAG, "请求广告条成功");
+                        //Log.i(TAG, "请求广告条成功");
                     }
 
                     @Override
                     public void onSwitchBanner() {
-                        Log.i(TAG, "广告条切换");
+                       // Log.i(TAG, "广告条切换");
                     }
 
                     @Override
                     public void onRequestFailed() {
-                        Log.i(TAG, "请求广告条失败");
+                        //Log.i(TAG, "请求广告条失败");
                     }
                 });
         ((Activity) this).addContentView(bannerView, layoutParams);
@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 } else {
                     translationText.setText(chinese);
                 }
-                Log.e("查询", chinese + "bh");
+                //Log.e("查询", chinese + "bh");
                 break;
         }
     }
