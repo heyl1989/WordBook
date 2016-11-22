@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/rl_welcome_bg"
-    >
+    tools:context=".SplashActivity">
 
     <RelativeLayout
         android:id="@+id/rl_splash"
@@ -45,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="简明英汉字典"
+                android:text="英语速查"
                 android:textSize="12dp"
                 android:textColor="#999999"/>
             <View

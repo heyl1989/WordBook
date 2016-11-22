@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:background="#F9F9F9"
     android:orientation="vertical"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     >
 
     <LinearLayout
@@ -16,7 +17,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="英汉字典"
+            android:text="英语速查"
             android:textSize="20dp"
             android:textColor="@android:color/white"
             android:gravity="center_vertical"
@@ -58,6 +59,7 @@
         android:layout_height="40dp"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
+        android:gravity="center"
         android:background="@drawable/btn_selector"
         android:text="翻    译"
         android:textColor="@android:color/white"
@@ -94,4 +96,12 @@
         android:text=""
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="18dp"/>
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 </LinearLayout>

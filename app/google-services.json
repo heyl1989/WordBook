@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "591372416230",
+    "firebase_url": "https://english-translate-f2839.firebaseio.com",
+    "project_id": "english-translate-f2839",
+    "storage_bucket": "english-translate-f2839.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591372416230:android:8045ffc5690e6399",
+        "android_client_info": {
+          "package_name": "com.heyl.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591372416230-bug1pm152ufg175phunra4rm00vla0lb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBvq9aaw_gvF3S7FgfXmlaSEqSm4UwZyQ8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
